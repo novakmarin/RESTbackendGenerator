@@ -11,8 +11,11 @@ def get_project_name():
 
 def iterate(folder, project_name):
     os.mkdir("repository")
+    print("Repository folder created.")
     os.mkdir("service")
+    print("Service folder created.")
     os.mkdir("controller")
+    print("Controller folder created.")
     for file_name in os.listdir(folder):
         if file_name.endswith(".java"):
             class_name = file_name[0:-5]
@@ -20,20 +23,26 @@ def iterate(folder, project_name):
             service_file = open("service" + os.sep + class_name + "Service.java", "w")
             service_file.write(create_service(class_name, project_name))
             service_file.close()
+            print(class_name + "Service.java added to service folder.")
 
             service_impl_file = open("service" + os.sep + class_name + "ServiceImpl.java", "w")
             service_impl_file.write(create_service_impl(class_name, project_name))
             service_impl_file.close()
+            print(class_name + "ServiceImpl.java added to service folder.")
 
             repository_file = open("repository" + os.sep + class_name + "Repository.java", "w")
             repository_file.write(create_repository(class_name, project_name))
             repository_file.close()
+            print(class_name + "Repository.java added to repository folder.")
 
             controller_file = open("controller" + os.sep + class_name + "Controller.java", "w")
             controller_file.write(create_controller(class_name, project_name))
             controller_file.close()
+            print(class_name + "Controller.java added to controller folder.")
+
         else:
             continue
+    print("REST backend successfully generated.")
 
 
 
